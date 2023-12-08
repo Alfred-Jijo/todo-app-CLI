@@ -36,9 +36,14 @@ func main() {
 		Short:     "todo for cli",
 	}
 	command.Subcommands = []*commander.Command{
-		cmd.MakeCmdAdd()
+		cmd.MakeCmdAdd(filename),
+		cmd.MakeCmdList(filename),
+		cmd.MakeCmdDone(filename),
+		cmd.MakeCmdUndone(filename),
+		cmd.MakeCmdDelete(filename),
+		cmd.MakeCmdUpdate(filename),
 	}
-	err = command.Dispatch(os.Args[1:])
+	err = command.Dispatch(nil, os.Args[1:])
 	if err != nil {
 		fmt.Printf("%v\n", err)
 		os.Exit(1)
